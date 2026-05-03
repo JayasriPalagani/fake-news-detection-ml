@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake News Detector</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+
+        textarea {
+            width: 60%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .result {
+            background: white;
+            width: 60%;
+            margin: 25px auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        ul {
+            text-align: left;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📰 AI Fake News Detection System</h1>
+    <p>Enter a news article and check whether it is real or fake.</p>
+
+    <form action="/predict" method="post">
+        <textarea name="news" rows="7" placeholder="Enter news text here..." required></textarea><br><br>
+        <button type="submit">Analyze News</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            <h2>Result: {{ prediction }}</h2>
+            <h3>Confidence: {{ confidence }}%</h3>
+
+            <h3>Why this result?</h3>
+            <ul>
+                {% for item in explanation %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+</body>
+</html>
